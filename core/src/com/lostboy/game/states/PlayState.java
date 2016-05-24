@@ -42,11 +42,18 @@ public class PlayState extends State {
 //            tree = new Tree(Gdx.input.getX(), Gdx.input.getY());
 //            trees.add(tree);
 //        }
-        if(Gdx.input.justTouched()){
-            int x = Gdx.input.getX()/2;
-            int y = (Lost_Boy.HEIGHT - Gdx.input.getY())/2;
-            tree = new Tree(x, y);
-            trees.add(tree);
+        if(Gdx.input.justTouched()) {
+            int x = Gdx.input.getX() / 2;
+            int y = (Lost_Boy.HEIGHT - Gdx.input.getY()) / 2;
+            //check if overlap a previous tree before creating new tree
+            if(!isOverlap(x, y)){
+                if (x >= 20 && x <= (Lost_Boy.WIDTH/2)-20) {
+                    if (y >= 20 && y <= (Lost_Boy.HEIGHT/2)-20) {
+                        tree = new Tree(x, y);
+                        trees.add(tree);
+                    }
+                }
+            }
         }
     }
 
@@ -63,10 +70,23 @@ public class PlayState extends State {
         sb.draw(background, cam.position.x - (cam.viewportWidth / 2), 0);
         sb.draw(bird.getBird(), bird.getPosition().x, bird.getPosition().y);
         for(int i = 0; i < trees.size; i++){
-            sb.draw(trees.get(i).getTree(), trees.get(i).getPosition().x, trees.get(i).getPosition().y);
+            //resize tree to 40*40
+            //draw new image centered on input coordinates
+            sb.draw(trees.get(i).getTree(), trees.get(i).getPosition().x-20, trees.get(i).getPosition().y-20, 40, 40);
         }
         sb.end();
 
+    }
+
+    public boolean isOverlap(int x, int y) {
+        for(int i = 0; i < trees.size; i++){
+            if(Math.abs(x - trees.get(i).getPosition().x) <= 40 ) {
+                if(Math.abs(y - trees.get(i).getPosition().y) <= 40) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
