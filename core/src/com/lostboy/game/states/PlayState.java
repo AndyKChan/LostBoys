@@ -50,21 +50,20 @@ public class PlayState extends State {
 //            tree = new Tree(Gdx.input.getX(), Gdx.input.getY());
 //            trees.add(tree);
 //        }
-        if(Gdx.input.justTouched() && trees.size < MAXTREES){
-            int x = snapInPosition(Gdx.input.getX()/2);
-            int y = snapInPosition((Lost_Boy.HEIGHT - Gdx.input.getY())/2);
-            if(!isOverlap(x,y) && x/BLOCKSIZE<PATHWIDTH-1 && y/BLOCKSIZE<PATHHEIGHT-1){
-                tree = new Tree(x,y);
+
+        if(Gdx.input.justTouched() && trees.size < MAXTREES) {
+            int x = snapInPosition(Gdx.input.getX() / 2);
+            int y = snapInPosition((Lost_Boy.HEIGHT - Gdx.input.getY()) / 2);
+            if (!isOverlap(x, y) && x / BLOCKSIZE < PATHWIDTH - 1 && y / BLOCKSIZE < PATHHEIGHT - 1) {
+                tree = new Tree(x, y);
                 trees.add(tree);
-                astarpath[x/BLOCKSIZE][y/BLOCKSIZE]=BLOCKED;
-                astarpath[(x+BLOCKSIZE)/BLOCKSIZE][y/BLOCKSIZE]=BLOCKED;
-                astarpath[x/BLOCKSIZE][(y+BLOCKSIZE)/BLOCKSIZE]=BLOCKED;
-                astarpath[(x+BLOCKSIZE)/BLOCKSIZE][(y+BLOCKSIZE)/BLOCKSIZE]=BLOCKED;
+                astarpath[x / BLOCKSIZE][y / BLOCKSIZE] = BLOCKED;
+                astarpath[(x + BLOCKSIZE) / BLOCKSIZE][y / BLOCKSIZE] = BLOCKED;
+                astarpath[x / BLOCKSIZE][(y + BLOCKSIZE) / BLOCKSIZE] = BLOCKED;
+                astarpath[(x + BLOCKSIZE) / BLOCKSIZE][(y + BLOCKSIZE) / BLOCKSIZE] = BLOCKED;
                 //printOutMatrix(astarpath);
             }
-
         }
-
     }
 
     @Override
