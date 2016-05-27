@@ -13,15 +13,15 @@ public class MenuState extends State{
     private Texture playBtn;
     public MenuState(GameStateManager gsm){
         super(gsm);
-        background = new Texture("grass.png");
+        background = new Texture("bg1.png");
         playBtn = new Texture("play_button.png");
+        cam.setToOrtho(false, Lost_Boy.WIDTH, Lost_Boy.HEIGHT);
     }
 
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
             gsm.set(new PlayState(gsm));
-            dispose();
         }
     }
 
@@ -32,15 +32,17 @@ public class MenuState extends State{
 
     @Override
     public void render(SpriteBatch sb) {
+        sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(background, 0,0, Lost_Boy.WIDTH, Lost_Boy.HEIGHT);
-        sb.draw(playBtn, (Lost_Boy.WIDTH / 2) - (playBtn.getWidth() / 2), Lost_Boy.HEIGHT / 2);
+        sb.draw(background, 0,0);
+        sb.draw(playBtn, cam.position.x - playBtn.getWidth()/ 2, cam.position.y);
         sb.end();
     }
 
     @Override
     public void dispose(){
         background.dispose();
-        //playBtn.dispose();
+        playBtn.dispose();
+        System.out.println("MenuState Disposed!");
     }
 }

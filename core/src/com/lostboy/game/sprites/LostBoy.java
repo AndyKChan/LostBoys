@@ -42,5 +42,9 @@ public class LostBoy {
         return bird;
     }
 
+    public void dispose() {
+        bird.dispose();
+    }
+
 
 }

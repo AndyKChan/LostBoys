@@ -22,7 +22,7 @@ public class PlayState extends State {
     private Tree tree;
     private Array<Tree> trees;
     private Tree hoverTree;
-    private static final int MAXTREES = 20;
+    private static final int MAXTREES = 10;
     private static final int BLOCKSIZE = 20;
     private static final int BLOCKED = 1000;
     private static final int PATHWIDTH = 12;
@@ -83,10 +83,10 @@ public class PlayState extends State {
                     //change game state to viewing where all inputs are ignored
                     //will also call A Star pathfinding etc there
                     gsm.set(new ViewState(gsm, trees));
-                    dispose();
                 }
             }
         }
+
     }
 
     @Override
@@ -135,5 +135,7 @@ public class PlayState extends State {
     public void dispose() {
         background.dispose();
         hoverTree.dispose();
+        bird.dispose();
+        System.out.println("PlayState Disposed!");
     }
 }
