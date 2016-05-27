@@ -55,7 +55,7 @@ public class PlayState extends State {
         super(gsm);
         bird = new LostBoy(50,300);
         cam.setToOrtho(false, Lost_Boy.WIDTH / 2, Lost_Boy.HEIGHT / 2);
-        background = new Texture("grass.png");
+        background = new Texture("bg1.png");
         trees = new Array<Tree>();
         hoverTree = new Tree(0, 0);
 
@@ -76,7 +76,7 @@ public class PlayState extends State {
         if(Gdx.input.justTouched() && trees.size < MAXTREES) {
             int x = snapInPosition(Gdx.input.getX() / 2);
             int y = snapInPosition((Lost_Boy.HEIGHT - Gdx.input.getY()) / 2);
-            if (!isOverlap(x, y) && x / BLOCKSIZE < PATHWIDTH - 1 && y / BLOCKSIZE < PATHHEIGHT - 1) {
+            if (!isOverlap(x, y) && x / BLOCKSIZE > 0 && x / BLOCKSIZE < PATHWIDTH - 2 && y / BLOCKSIZE > 0 && y / BLOCKSIZE < PATHHEIGHT - 2) {
                 tree = new Tree(x, y);
                 trees.add(tree);
                 if(trees.size == MAXTREES){
@@ -99,7 +99,7 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(background, cam.position.x - (cam.viewportWidth / 2), 0);
+        sb.draw(background, cam.position.x - (cam.viewportWidth / 2), 0,Lost_Boy.WIDTH/2, Lost_Boy.HEIGHT/2);
         sb.draw(bird.getBird(), bird.getPosition().x, bird.getPosition().y);
         for(int i = 0; i < trees.size; i++){
             sb.draw(trees.get(i).getTree(), trees.get(i).getPosition().x, trees.get(i).getPosition().y,40,40);

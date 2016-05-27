@@ -37,7 +37,6 @@ public class Tree {
         treeNotTopLeftRightBotRight = new Texture("treeNotTopLeftRightBotRight.png");
         treeNotTopRightBotLeftRight = new Texture("treeNotTopRightBotLeftRight.png");
 
-
         position = new Vector2(x, y);
     }
 
@@ -45,6 +44,7 @@ public class Tree {
         return tree;
     }
     public Texture getTreeImage(int x, int y, Array<Tree> trees){
+        if(x >10*20 || y > 18*20) return treeNotAll;
         float treeX, treeY;
         boolean botLeft = true, botRight = true, topLeft = true, topRight = true;
         for(int i = 0; i < trees.size; i++){
@@ -85,23 +85,48 @@ public class Tree {
 
             }
         }
-        if(botLeft && botRight && topLeft && topRight) return tree;
+
+        if(x == 0) {
+            botLeft = false;
+            topLeft = false;
+            if(y == 0){
+                botRight = false;
+            } else if(y > 17*20) {
+                topRight = false;
+            }
+        } else if (x > 9*20) {
+            botRight = false;
+            topRight = false;
+            if(y == 0){
+                botLeft = false;
+            } else if(y > 17*20) {
+                topLeft = false;
+            }
+        } else if (y ==0) {
+            botLeft = false;
+            botRight = false;
+        } else if (y > 17*20){
+            topLeft = false;
+            topRight = false;
+        }
+
+
         if(botLeft && botRight && topLeft && !topRight) return treeNotTopRight;
-        if(botLeft && botRight && !topLeft && topRight) return treeNotTopLeft;
-        if(botLeft && botRight && !topLeft && !topRight) return treeNotTop;
-        if(botLeft && !botRight && topLeft && topRight) return treeNotBotRight;
-        if(botLeft && !botRight && topLeft && !topRight) return treeNotRight;
-        if(botLeft && !botRight && !topLeft && topRight) return treeNotTopLeftBotRight;
-        if(botLeft && !botRight && !topLeft && !topRight) return treeNotTopLeftRightBotRight;
-        if(!botLeft && botRight && topLeft && topRight) return treeNotBotLeft;
-        if(!botLeft && botRight && topLeft && !topRight) return treeNotTopRightBotLeft;
-        if(!botLeft && botRight && !topLeft && topRight) return treeNotLeft;
-        if(!botLeft && botRight && !topLeft && !topRight) return treeNotTopLeftRightBotLeft;
-        if(!botLeft && !botRight && topLeft && topRight) return treeNotBot;
-        if(!botLeft && !botRight && topLeft && !topRight) return treeNotTopRightBotLeftRight;
-        if(!botLeft && !botRight && !topLeft && topRight) return treeNotTopLeftBotLeftRight;
-        if(!botLeft && !botRight && !topLeft && !topRight) return treeNotAll;
-        return tree;
+        else if(botLeft && botRight && !topLeft && topRight) return treeNotTopLeft;
+        else if(botLeft && botRight && !topLeft && !topRight) return treeNotTop;
+        else if(botLeft && !botRight && topLeft && topRight) return treeNotBotRight;
+        else if(botLeft && !botRight && topLeft && !topRight) return treeNotRight;
+        else if(botLeft && !botRight && !topLeft && topRight) return treeNotTopLeftBotRight;
+        else if(botLeft && !botRight && !topLeft && !topRight) return treeNotTopLeftRightBotRight;
+        else if(!botLeft && botRight && topLeft && topRight) return treeNotBotLeft;
+        else if(!botLeft && botRight && topLeft && !topRight) return treeNotTopRightBotLeft;
+        else if(!botLeft && botRight && !topLeft && topRight) return treeNotLeft;
+        else if(!botLeft && botRight && !topLeft && !topRight) return treeNotTopLeftRightBotLeft;
+        else if(!botLeft && !botRight && topLeft && topRight) return treeNotBot;
+        else if(!botLeft && !botRight && topLeft && !topRight) return treeNotTopRightBotLeftRight;
+        else if(!botLeft && !botRight && !topLeft && topRight) return treeNotTopLeftBotLeftRight;
+        else return tree;
+
     }
 
     public Vector2 getPosition() {
@@ -111,5 +136,20 @@ public class Tree {
     public void dispose() {
         tree.dispose();
         treeNot.dispose();
+        treeNotBot.dispose();
+        treeNotBotLeft.dispose();
+        treeNotBotRight.dispose();
+        treeNotLeft.dispose();
+        treeNotRight.dispose();
+        treeNotTop.dispose();
+        treeNotTopLeft.dispose();
+        treeNotTopRight.dispose();
+        treeNotAll.dispose();
+        treeNotTopLeftBotRight.dispose();
+        treeNotTopRightBotLeft.dispose();
+        treeNotTopLeftBotLeftRight.dispose();
+        treeNotTopLeftRightBotLeft.dispose();
+        treeNotTopLeftRightBotRight.dispose();
+        treeNotTopRightBotLeftRight.dispose();
     }
 }
