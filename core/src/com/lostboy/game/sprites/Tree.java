@@ -86,6 +86,7 @@ public class Tree {
             }
         }
 
+        //add visual cannot place if overlap on border
         if(x == 0) {
             botLeft = false;
             topLeft = false;
@@ -110,7 +111,6 @@ public class Tree {
             topRight = false;
         }
 
-
         if(botLeft && botRight && topLeft && !topRight) return treeNotTopRight;
         else if(botLeft && botRight && !topLeft && topRight) return treeNotTopLeft;
         else if(botLeft && botRight && !topLeft && !topRight) return treeNotTop;
@@ -125,6 +125,7 @@ public class Tree {
         else if(!botLeft && !botRight && topLeft && topRight) return treeNotBot;
         else if(!botLeft && !botRight && topLeft && !topRight) return treeNotTopRightBotLeftRight;
         else if(!botLeft && !botRight && !topLeft && topRight) return treeNotTopLeftBotLeftRight;
+        else if(!botLeft && !botRight && !topLeft && !topRight) return treeNotAll;
         else return tree;
 
     }
