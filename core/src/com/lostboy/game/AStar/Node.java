@@ -17,7 +17,7 @@ public class Node {
         this.col = col;
         this.row = row;
         this.g = g;
-        this.h = h;
+        this.h = Math.abs(col - PATHWIDTH/2) + Math.abs(row - PATHHEIGHT);
         this.f = g + h;
         blocked = false;
     }

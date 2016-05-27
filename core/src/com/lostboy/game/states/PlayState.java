@@ -106,7 +106,7 @@ public class PlayState extends State {
         }
         int x = snapInPosition(Gdx.input.getX()/2);
         int y = snapInPosition((Lost_Boy.HEIGHT - Gdx.input.getY())/2);
-        sb.draw(isOverlap(x,y)?hoverTree.getTreeNot():hoverTree.getTree(), x, y, 40, 40);
+        sb.draw(hoverTree.getTreeImage(x,y,trees), x, y, 40, 40);
         sb.end();
 
     }
@@ -122,6 +122,7 @@ public class PlayState extends State {
         return false;
     }
 
+
     public int snapInPosition(int coordinate) {
         double value = 0;
 
@@ -133,6 +134,6 @@ public class PlayState extends State {
     @Override
     public void dispose() {
         background.dispose();
-
+        hoverTree.dispose();
     }
 }

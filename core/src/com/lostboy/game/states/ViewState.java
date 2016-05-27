@@ -59,5 +59,8 @@ public class ViewState extends State {
     @Override
     public void dispose() {
         background.dispose();
+        for(int i = 0; i < trees.size; i++){
+            trees.get(i).getTree().dispose();
+        }
     }
 }
